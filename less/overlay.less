@@ -1,0 +1,417 @@
+.bns_overlay {
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  text-align: center;
+  z-index: 11111;
+  overflow-y: auto;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  &.bns_overlay_hist {
+   .bns_overlay_iner {
+     width: 680px;
+   }
+  }
+  &.bns_over_gift {
+    .bns_overlay_iner {
+      padding: 35px 13px 13px;
+      border: 1px solid #72982c;
+      width: 460px;
+    }
+  }
+  .bns_overlay_iner {
+    width: 440px;
+    background-color: #ffffff;
+    padding: 35px 30px;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    position: relative;
+    border-radius: 5px;
+    .close {
+      position: absolute;
+      right: 19px;
+      top:19px;
+      width: 12px;
+      height: 12px;
+      background-image: url("@{burl}close.png");
+      display: block;
+    }
+    .bns_congr_head {
+      float: left;
+      width: 100%;
+      font-weight: bold;
+      font-size: 24px;
+      text-align: center;
+      color: #303030;
+      margin-top: 24px;
+      margin-bottom: 17px;
+    }
+    .bns_congr_img {
+      float: left;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      &:before {
+        width: 486px;
+        height: 128px;
+        background-image: url("@{burl}congrat.png");
+        display: block;
+        position: absolute;
+        left: 50%;
+        margin-left: -243px;
+        top: 7px;
+        content: '';
+      }
+      img {
+        border-radius: 100%;
+        width: 153px;
+        border:3px solid #6d8f13;
+      }
+    }
+    .bns_congr_name {
+      float: left;
+      width: 100%;
+      text-align: center;
+      color: #303030;
+      font-size: 18px;
+      margin-top: 25px;
+      font-weight: 500;
+      margin-bottom: 27px;
+    }
+    .bns_congr_achiv_block {
+      float: left;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 24px;
+      .bns_congr_achiv {
+        width: auto;
+        padding: 0 25px;
+        border-radius: 5px;
+        color: #6d8f13;
+        font-size: 16px;
+        line-height: 38px;
+        border: 1px solid #6d8f13;
+        text-decoration: none;
+        background-color: transparent;
+        display: inline-block;
+        -webkit-transition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        -ms-transition: all 300ms ease;
+        -o-transition: all 300ms ease;
+        transition: all 300ms ease;
+      }
+    }
+    .bns_congr_desc {
+      float: left;
+      width:100%;
+      text-align: center;
+      color: #808080;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .bns_hist_head {
+      float: left;
+      width: 100%;
+      color: #303030;
+      font-size: 24px;
+      font-weight: 500;
+      margin-top:5px;
+      margin-bottom:19px;
+    }
+    .bns_hist_main {
+      float: left;
+      width: 100%;
+      .bns_hist_tem {
+        float: left;
+        width: 100%;
+        padding: 6px 0;
+        border-bottom: 1px solid #d2d2d2;
+        .bns_hist_date {
+          float: left;
+          width: 72px;
+          text-align: center;
+          line-height: 18px;
+          color: #808080;
+          font-size: 13px;
+          display: inline-block;
+        }
+        .bns_hist_bal_change {
+          float: left;
+          width: 65px;
+          text-align: right;
+          color: #6d8f13;
+          display: inline-block;
+          height: 18px;
+          line-height: 18px;
+          font-size: 13px;
+          &.min {
+            color: #303030;
+          }
+        }
+        .bns_hist_name {
+          float: left;
+          width: auto;
+          box-sizing: border-box;
+          padding-left:40px;
+          color: #303030;
+          line-height: 18px;
+          font-size: 13px;
+        }
+        .bns_hist_bal_now {
+          float: right;
+          padding-right: 20px;
+          line-height: 18px;
+          font-size: 13px;
+          color: #303030;
+        }
+      }
+    }
+    .bns_hist_desc {
+      float: left;
+      width: 100%;
+      color: #303030;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+    .bns_over_achiv_img {
+      float: left;
+      width: 100%;
+      text-align: center;
+      margin-top:38px;
+      margin-bottom: 12px;
+      img {
+        width: 154px;
+        border: 3px solid #6d8f13;
+        border-radius: 100%;
+      }
+    }
+    .bns_over_achiv_name {
+      float: left;
+      width: 100%;
+      text-align: center;
+      color:#303030;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .bns_over_achiv_has_block {
+      float: left;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 24px;
+      .bns_over_achiv_has {
+        display: inline-block;
+        line-height: 40px;
+        color: #72982c;
+        font-size: 16px;
+        border-radius: 5px;
+        background-color: #f7f7f7;
+        width: 180px;
+      }
+    }
+    .bns_over_achiv_desc {
+      float: left;
+      width: 100%;
+      text-align: center;
+      color: #808080;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 109px;
+      a {
+        color: #6d8f13;
+      }
+    }
+    .bns_over_achiv_dop {
+      float: left;
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      border-radius: 0 0 5px 5px;
+      background-color: #f7f7f7;
+      font-size: 13px;
+      color: #808080;
+      line-height: 20px;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+    .bns_over_gift_main {
+      float: left;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: none;
+      padding: 5px 25px 5px 25px;
+      .bns_over_gift_head {
+        float: left;
+        width: 100%;
+        text-align: center;
+        color: #303030;
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom:21px;
+      }
+      .bns_over_gift_img {
+        float: left;
+        width: 100%;
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 19px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+        span {
+          position: absolute;
+          right: 0px;
+          top:0px;
+          background-color: #72982c;
+          width: 122px;
+          text-align: center;
+          line-height: 53px;
+          color: #fff;
+          font-size: 16px;
+          font-weight: 500;
+          border-radius: 0 0 0 6px;
+        }
+      }
+      .bns_over_gift_name {
+        float: left;
+        width: 100%;
+        box-sizing: border-box;
+        color: #303030;
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+      .bns_over_gift_har {
+        float: left;
+        width: 100%;
+        font-size: 14px;
+        color: #929292;
+
+        .bns_over_gift_har_item {
+          float: left;
+          width: 50%;
+          color: #808080;
+          font-size: 15px;
+          line-height: 20px;
+        }
+      }
+      a {
+        cursor: default;
+        width: 100%;
+        color: #fff;
+        font-size: 13px;
+        text-transform: uppercase;
+        line-height: 40px;
+        border-radius: 5px;
+        background-color: #72982c;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        margin-top: 14px;
+      }
+    }
+  }
+}
+
+
+
+.bns_overlay {
+  .bns_overlay_iner {
+    div.bns_hist_pager {
+      a {
+        cursor: pointer;
+        width: auto;
+        color: #000;
+        font-size: 13px;
+        text-transform: none;
+        line-height: normal;
+        border: 1px solid #72982c;
+        border-radius: 5px;
+        background-color: transparent;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        margin-top: 14px;
+        padding: 3px 4px;
+      }
+
+      a.act {
+        color: #fff;
+        background: #72982c;
+      }
+    }
+  }
+}
+
+
+.bns_overlay {
+  .bns_overlay_iner {
+    .bns_over_gift_main {
+      .step1 {
+        a.js-confirm {
+          display: inline-block;
+          padding: 0 17px;
+          line-height: 38px;
+          border: 1px solid #72982c;
+          color: #fff;
+          font-size: 13px;
+          text-transform: uppercase;
+          margin-right: 10px;
+          text-decoration: none;
+          border-radius: 5px;
+          -webkit-transition: all 300ms ease;
+          -moz-transition: all 300ms ease;
+          -ms-transition: all 300ms ease;
+          -o-transition: all 300ms ease;
+          transition: all 300ms ease;
+          width: auto;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #76895a;
+            color: #fff;
+          }
+        }
+
+        a.js-popup-close {
+          cursor: pointer;
+          display: inline-block;
+          padding: 0 17px;
+          line-height: 38px;
+          border: 1px solid #72982c;
+          color: #72982c;
+          font-size: 13px;
+          text-transform: uppercase;
+          text-decoration: none;
+          border-radius: 5px;
+          -webkit-transition: all 300ms ease;
+          -moz-transition: all 300ms ease;
+          -ms-transition: all 300ms ease;
+          -o-transition: all 300ms ease;
+          transition: all 300ms ease;
+          background: transparent;
+          width: auto;
+
+          &:hover {
+            background-color: #72982c;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

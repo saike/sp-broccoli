@@ -1,0 +1,41 @@
+<div class="bns_overlay_detal">
+    <table>
+        <tr>
+            <td>Наименование:</td>
+            <td>Кол-во</td>
+            <td>Сумма</td>
+            <td>Бонусы</td>
+        </tr>
+        {{#each products}}
+        <tr>
+            <td>
+                <span>{{name}}</span>
+                <strong>Арт. {{sku}}</strong>
+            </td>
+            <td>
+                {{num}} шт
+            </td>
+            <td>
+                {{price}}
+            </td>
+            <td>
+                {{points}}<br>
+                {{pointsText}}
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+    <div class="bns_overlay_detal_sum">
+            <span>
+                Начисленно балов всего:
+            </span>
+        <strong>
+            {{pointsDelta}} {{pointsDeltaText}}
+        </strong>
+    </div>
+    <div class="bns_input_block bns_input_block_foot">
+        <a href="#" class="bns_back js-popup-close">
+            <span>Назад</span>
+        </a>
+    </div>
+</div>

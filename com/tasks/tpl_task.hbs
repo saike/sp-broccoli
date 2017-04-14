@@ -1,0 +1,24 @@
+{{#unless rule }}
+<div class="bns_qust_item" data-action-id="{{actionId}}" xmlns="http://www.w3.org/1999/html">
+    <div class="bns_qust_item_left">
+        <img src="{{icon}}" alt="">
+        <img src="{{iconHover}}" class="hov" alt="">
+    </div>
+    <div class="bns_qust_item_right">
+        <div class="bns_qust_item_right_name">
+            <span>{{text}}</span>
+            <span class="bns_qust_item_right_bal"> + {{points}} {{pointsText}}</span>
+        </div>
+    </div>
+    <span class="js-run-task-wrap"></span>
+</div>
+{{else}}
+    <div class="bns_qust_item rule" data-action-id="{{actionId}}">
+        <div class="bns_qust_item_left">
+            100 руб. <br/> = </br> 3 балла
+        </div>
+        <div class="bns_qust_item_right">
+            <span class="bns_qust_item_right_name">Совершайте покупки на сайте и получайте баллы</span>
+        </div>
+    </div>
+{{/unless}}

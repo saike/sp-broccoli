@@ -1,0 +1,12 @@
+<div class="bns_tab_gift_item{{#if disable}} bns_tab_gift_item__grey{{/if}}">
+    <div class="bns_tab_gift_item_img">
+        <img src="{{pic_full}}" alt="{{name}}">
+        <span>{{points}} {{pointsText}}</span>
+    </div>
+    <span class="bns_tab_gift_item_name">{{name}}</span>
+    {{#unless disable}}
+    <a href="#" class="js-btn-get">Получить подарок</a>
+    {{else}}
+    <span class="bns_tab_gift_item_disable">Недостаточно баллов</span>
+    {{/unless}}
+</div>

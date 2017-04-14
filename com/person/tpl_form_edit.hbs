@@ -1,0 +1,58 @@
+<div>
+    <div class="bns_overlay_edit_prof js-person-main">
+        <div class="bns_input_block">
+            <label>Фамилия</label>
+            <input name="surname" type="text" value="{{lastName}}">
+        </div>
+        <div class="bns_input_block">
+            <label>Имя</label>
+            <input name="name" type="text" value="{{firstName}}">
+        </div>
+        <div class="bns_input_block">
+            <label>Эл. почта</label>
+            <input name="email" type="text" id="email" value="{{email}}">
+        </div>
+        <div class="bns_input_block">
+            <label>Телефон</label>
+            <input name="phone" type="text" id="phone" value="{{phone}}">
+        </div>
+        <div class="bns_input_block bns_input_block_sel_date">
+            <label>Дата рождения</label>
+            <div class="bns_select js-select">
+                <span>{{day}}</span>
+                <input name="day" type="hidden" value="1">
+                <div class="bns_select_popup">
+                    {{#each days}}
+                        <a href="{{value}}">{{text}}</a>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="bns_select js-select">
+                <span>{{month}}</span>
+                <input name="month" type="hidden" value="1">
+                <div class="bns_select_popup">
+                    {{#each months}}
+                        <a href="{{value}}">{{text}}</a>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="bns_select js-select">
+                <span>{{year}}</span>
+                <input name="year" type="hidden" value="1">
+                <div class="bns_select_popup">
+                    {{#each years}}
+                        <a href="{{value}}">{{text}}</a>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="bns_input_block bns_input_block_foot">
+            <a href="#" class="bns_save js-save"><span>Сохранить</span></a>
+            <a href="#" class="bns_back js-popup-close"><span>Отмена</span></a>
+        </div>
+    </div>
+    <div class="js-person-message">
+        <p></p>
+        <a href="#" class="bns_save js-mess-ok"><span>Ok</span></a>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="bns_achiv_warap">
+    <div class="bns_achiv_main">
+        <div class="bns_achiv_line">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="-74 135 795 1000">
+                <path fill-opacity="0" stroke-width="5" stroke="#cad2b7" d="M709.6,106.5v497.9c0,70.9-58.1,128.4-129.7,128.4s-129.7-57.5-129.7-128.4V267.6l0,0
+	c0-70.9-62-128.5-133.6-128.5s-128,57.3-128,128.2v337.2c0,70.9-58.1,128.4-129.7,128.4S-70.9,675.3-70.9,604.4V106.5"/>
+                <path id="path" fill-opacity="0" stroke-width="5" stroke="#6d8f13" d="M709.6,106.5v497.9c0,70.9-58.1,128.4-129.7,128.4s-129.7-57.5-129.7-128.4V267.6l0,0
+	c0-70.9-62-128.5-133.6-128.5s-128,57.3-128,128.2v337.2c0,70.9-58.1,128.4-129.7,128.4S-70.9,675.3-70.9,604.4V106.5"/>
+            </svg>
+        </div>
+        <span class="bns_achiv_start act">
+                На старт!
+            </span>
+        <span class="bns_achiv_fin">Ура!<br> {{level}} уровень пройден!</span>
+        {{#each list}}
+        <div data-index="{{@key}}" class="js-badges-item-popup bns_achiv_item bns_achiv_item{{this.index}}{{#if this.is_received}} act{{/if}}">
+            <div class="bns_achiv_item_img">
+                <div class="bns_achiv_item_img_filter"></div>
+                <img src="{{this.thumbs.url_250x250}}" alt="">
+            </div>
+
+            <div class="bns_achiv_info">
+                <span>{{this.name}}</span>
+                {{#unless this.is_received}}
+                <div class="bns_achiv_tooltip">
+                    Будет доступен при <strong>{{this.points}} баллов</strong>
+                </div>
+                {{/unless}}
+            </div>
+        </div>
+        {{/each}}
+        {{#if count}}
+        <div class="bns_achiv_lvl">
+            <strong>{{level}}</strong>
+            <span>УРОВЕНЬ</span>
+        </div>
+        {{/if}}
+    </div>
+</div>

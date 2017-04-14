@@ -1,0 +1,213 @@
+.bns_achiv_warap {
+  float: left;
+  width: 100%;
+  margin-top: 35px;
+  .bns_achiv_main {
+    margin: 0 auto;
+    width:900px;
+    height: 610px;
+    position: relative;
+
+    .bns_achiv_start {
+      position: absolute;
+      width: 82px;
+      color: #cad2b7;
+      font-size: 14px;
+      font-weight: bold;
+      left: 37px;
+      top:15px;
+      text-align: center;
+    }
+    .bns_achiv_start.act {
+      color: #6d8f13;
+    }
+    .bns_achiv_fin {
+      width: 179px;
+      text-align: center;
+      position: absolute;
+      color: #cad2b7;
+      font-size: 14px;
+      font-weight: bold;
+      right: 0px;
+      top:0px;
+      line-height: 18px;
+    }
+    .bns_achiv_fin.act {
+      color: #6d8f13;
+    }
+    .bns_achiv_lvl {
+      position: absolute;
+      left: 50%;
+      bottom: 0px;
+      width: 120px;
+      margin-left: -60px;
+      z-index: -1;
+      strong {
+        width: 100%;
+        text-align: center;
+        color: #cad2b7;
+        font-size: 160px;
+        float: left;
+        font-weight: 400;
+      }
+      span {
+        float: left;
+        width: 100%;
+        text-align: center;
+        color: #cad2b7;
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: -16px;
+      }
+    }
+    .bns_achiv_item {
+      position: absolute;
+      width: 121px;
+      cursor: pointer;
+      &.bns_achiv_item1 {
+        left: 17px;
+        top:140px;
+      }
+      &.bns_achiv_item2 {
+        left: 17px;
+        top:407px;
+      }
+      &.bns_achiv_item3 {
+        left: 262px;
+        top:407px;
+      }
+      &.bns_achiv_item4 {
+        left: 262px;
+        top:140px;
+      }
+      &.bns_achiv_item5 {
+        left: 504px;
+        top:140px;
+      }
+      &.bns_achiv_item6 {
+        left: 504px;
+        top:407px;
+      }
+      &.bns_achiv_item7 {
+        left: 753px;
+        top:140px;
+      }
+      &.bns_achiv_item8 {
+        left: 753px;
+        top:407px;
+      }
+      &.act {
+        .bns_achiv_item_img {
+          .bns_achiv_item_img_filter {
+            display: none;
+          }
+          img {
+            opacity: 1;
+            filter: none;
+          }
+        }
+        .bns_achiv_info {
+          span {
+            opacity: 1;
+          }
+        }
+      }
+      .bns_achiv_item_img {
+        width: 100%;
+        background-color: #fff;
+        border-radius: 100%;
+        float: left;
+        overflow: hidden;
+        position: relative;
+        img {
+          filter: grayscale() brightness(1.1);
+          width: 121px;
+          height: 121px;
+          box-sizing: border-box;
+          border: 3px solid #6d8f13;
+          border-radius: 100%;
+          float: left;
+          margin: 0px;
+          opacity: .7;
+        }
+      }
+      .bns_achiv_info {
+        float: left;
+        text-align: center;
+        margin-top: 5px;
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        margin-left: -100px;
+        bottom: -35px;
+        &:hover {
+          .bns_achiv_tooltip {
+            opacity: 1;
+          }
+        }
+        span {
+          display: inline-block;
+          line-height: 28px;
+          color: #6d8f13;
+          border: 1px solid #6d8f13;
+          background-color: #fff;
+          padding: 0px 9px;
+          white-space: nowrap;
+          border-radius: 5px;
+          opacity: 0.75;
+        }
+        .bns_achiv_tooltip {
+          width: 230px;
+          box-sizing: border-box;
+          padding: 11px 10px;
+          background-color: rgba(0,0,0,0.37);
+          color: #fff;
+          border-radius: 3px;
+          position: absolute;
+          top:39px;
+          left: 50%;
+          margin-left:-115px;
+          font-size: 14px;
+          opacity: 0;
+          -webkit-transition: all 300ms ease;
+          -moz-transition: all 300ms ease;
+          -ms-transition: all 300ms ease;
+          -o-transition: all 300ms ease;
+          transition: all 300ms ease;
+          &:before {
+            width: 20px;
+            height: 10px;
+            background-image: url("@{burl}tt_arr.png");
+            content: '';
+            position: absolute;
+            display: block;
+            left: 50%;
+            margin-left: -10px;
+            top:-10px;
+          }
+          strong {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+    .bns_achiv_line {
+      height: 570px;
+      width: 750px;
+      overflow: hidden;
+      position: absolute;
+      left: 74px;
+      top:46px;
+    }
+  }
+}
+.bns_achiv_item_img_filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(109, 143, 19, 0.54);
+  opacity: .3;
+}

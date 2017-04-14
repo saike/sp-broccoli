@@ -1,0 +1,28 @@
+<div>
+    <div class="bns_hist_main">
+        {{#each entries}}
+        <div class="bns_hist_tem">
+            <span class="bns_hist_date">{{date}}</span>
+            <span class="bns_hist_bal_change {{addClass}}">{{points}}</span>
+            <span class="bns_hist_name">{{name}}</span>
+            <span class="bns_hist_bal_now">{{rub}}</span>
+        </div>
+        {{/each}}
+    </div>
+    {{#if pages}}
+    <div class="bns_hist_pager">
+        {{#if pagePrev}}
+            <a href="#" data-page="{{pagePrev}}" class="this-prev"><</a>
+        {{/if}}
+        {{#each pages}}
+            <a href="#" data-page="{{page}}" class="{{#if active}}act{{/if}}">{{page}}</a>
+        {{/each}}
+        {{#if pageNext}}
+            <a href="#" data-page="{{pageNext}}" class="sp_cmn-paginate__arrow this-next">></a>
+        {{/if}}
+    </div>
+    {{/if}}
+    <span class="bns_hist_desc">
+        Доступное для списания количество баллов: <strong>{{points}}</strong>
+    </span>
+</div>

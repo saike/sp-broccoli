@@ -1,0 +1,89 @@
+.bns_faq {
+  float: left;
+  width: 100%;
+  margin-top:35px;
+  .bns_faq_desc {
+    float: left;
+    width: 100%;
+    color: #383838;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 60px;;
+  }
+  .bns_faq_main {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #cccccc;
+    .bns_faq_item {
+      float: left;
+      width: 100%;
+      border: 1px solid #cccccc;
+      border-bottom: 0;
+      &.act {
+        background-color: #f7f7f7;
+        .bns_faq_item_top {
+          span {
+            color: #383838;
+          }
+          a {
+            background-image: url("@{burl}faq_arr_t.png");
+            &:hover {
+              background-image: url("@{burl}faq_arr_t_h.png");
+              background-color: #72982c;
+            }
+          }
+        }
+      }
+      .bns_faq_item_top {
+        float: left;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+          background: #f7f7f7;
+        }
+        span {
+          float: left;
+          width: 100%;
+          box-sizing: border-box;
+          padding: 26px 50px 25px 20px;
+          color: #638425;
+          font-weight: bold;
+        }
+        a {
+          width: 30px;
+          height: 30px;
+          display: block;
+          background-repeat:no-repeat;
+          background-position: center center;
+          background-image: url("@{burl}faq_arr_b.png");
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          margin-top: -15px;
+          border-radius: 30px;
+          -webkit-transition: all 300ms ease;
+          -moz-transition: all 300ms ease;
+          -ms-transition: all 300ms ease;
+          -o-transition: all 300ms ease;
+          transition: all 300ms ease;
+          &:hover {
+            background-image: url("@{burl}faq_arr_b_h.png");
+            background-color: #72982c;
+          }
+        }
+      }
+      .bns_faq_item_popup {
+        padding: 0 20px 26px;
+        color: #383838;
+        font-size: 13px;
+        line-height: 20px;
+        float: left;
+        width: 100%;
+        box-sizing: border-box;
+        display: none;
+      }
+    }
+  }
+}

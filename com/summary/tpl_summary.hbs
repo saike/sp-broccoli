@@ -1,0 +1,38 @@
+<div class="bns_info">
+    <div class="bns_info_line">
+        <div class="bns_info_line_top">
+            <span class="bns_info_line_top_bal">{{points}} {{pointsText}}</span>
+            <span class="bns_info_line_top_text">Количество доступных баллов для получения подарков</span>
+        </div>
+        <div class="bns_info_line_main">
+            <div class="bns_info_line_fill" style="width: {{progress}}%"></div>
+        </div>
+        <div class="bns_info_line_main_gift"></div>
+    </div>
+    <div class="bns_info_left">
+        <span class="bns_info_left_head">
+            Полученные статусы:
+        </span>
+        <div class="bns_info_left_achiv">
+        {{#each badges}}
+            <div class="bns_info_left_achiv_item{{#if this.is_received}} act{{/if}}">
+                <img src="{{this.thumbs.url_50x50}}" alt="">
+            </div>
+        {{/each}}
+        </div>
+        <div class="bns_info_left_open">
+            <span>Открыто: <strong>{{countGifts}} {{countGiftsText}}</strong></span>
+        </div>
+        <div class="bns_info_left_open bns_info_left_open_gal">
+            <span>Выполнено:  <strong>{{completedTasks}} {{completedTasksText}}</strong></span>
+        </div>
+    </div>
+    <div class="bns_info_right">
+        <span class="bns_info_right_head">Больше баллов — больше подарков!</span>
+        <span class="bns_info_right_text">Копите баллы, чтобы приобретать подарки и получать статусы. Баллы можно получать за совершенную покупку в магазине или выполняя  специальные задания.  При покупке, на сайте наших товаров помните, что 100 рублей = 3 балла.</span>
+        <div class="bns_info_right_linc">
+            <a href="#" class="js-move-to-tasks btn-green">выполнить задание</a>
+            <a href="#" class="js-open-hist">История транзакций</a>
+        </div>
+    </div>
+</div>
