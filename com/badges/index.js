@@ -7,68 +7,76 @@ const ViewBase = require('../../com/base/view');
 const Popup = require('../popup');
 
 class Badges extends Ctrl {
-    constructor(app) {
-        super();
+  constructor(app) {
+    super();
 
-        this._ModelBadges = new ModelBadges();
-        this._ModelBadges.on(ModelBadges.EVENT_FETCH, ()=>{
-            this.emit(Badges.EVENT_FETCH);
-            this._ViewBadges.updateProgress();
-        });
+    this._ModelBadges = new ModelBadges();
+    this._ModelBadges.on(ModelBadges.EVENT_FETCH, () => {
+      this.emit(Badges.EVENT_FETCH);
+      this._ViewBadges.updateProgress();
+    });
 
-        this._ViewBadges = new ViewBadges({
-            model: this._ModelBadges
-        });
+    this._ViewBadges = new ViewBadges({
+      model: this._ModelBadges
+    });
 
-        this._ViewBadges.enableBinding();
-        this._ViewBase = this._ViewBadges;
+    this._ViewBadges.enableBinding();
+    this._ViewBase = this._ViewBadges;
 
-        this._ViewBadges.on(ViewBadges.EVENT_POPUP_BADGES, (data)=>{
-            this.showPopupBadges(data);
-        });
+    this._ViewBadges.on(ViewBadges.EVENT_POPUP_BADGES, (data) => {
+      this.showPopupBadges(data);
+    });
 
-        this._ViewPopupBadges = new ViewPopupBadges({
-            model: this._ModelBadges
-        });
+    this._ViewPopupBadges = new ViewPopupBadges({
+      model: this._ModelBadges
+    });
 
-        this._Popup = new Popup();
+    this._ViewPopupBadgesNew = new ViewPopupBadgesNew({
+      model: this._ModelBadges
+    });
 
-        this.on(ViewBase.EVENT_MOUNT, this._ViewBase.updateProgress.bind(this._ViewBase));
-        this._ViewPopupBadges.on(ViewPopupBadges.EVENT_MOVE_TO_TASKS, ()=>{
-            this._Popup.close();
-            let $el = $('a[href="#qust"]');
-            $el.click();
-            setTimeout(()=>{
-                $('html, body').animate({
-                    scrollTop: $el.offset().top
-                }, 2000);
-            }, 500);
-        });
+    this._Popup = new Popup();
+
+    this.on(ViewBase.EVENT_MOUNT, this._ViewBase.updateProgress.bind(this._ViewBase));
+
+    let quests_callback = () => {
+      this._Popup.close();
+      let $el = $('a[href="#qust"]');
+      $el.click();
+      setTimeout(() => {
+        $('html, body').animate({
+          scrollTop: $el.offset().top
+        }, 2000);
+      }, 500);
+    };
+
+    this._ViewPopupBadges.on(ViewBadges.EVENT_MOVE_TO_TASKS, quests_callback);
+    this._ViewPopupBadgesNew.on(ViewBadges.EVENT_MOVE_TO_TASKS, quests_callback);
+  }
+
+  showPopupBadges(data) {
+    if (!data.is_received) return;
+    let PView = this._ViewPopupBadges;
+
+    if (data.index == 1) {
+      PView = this._ViewPopupBadgesNew;
     }
 
-    showPopupBadges(data) {
-        if (!data.is_received) return;
-        let PView = this._ViewPopupBadges;
+    PView
+      .setData(data)
+      .render();
 
-        if (data.index == 1) {
-            PView = new ViewPopupBadgesNew();
-        }
+    this._Popup.setContent(PView);
+    this._Popup.show();
+  }
 
-        PView
-            .setData(data)
-            .render();
+  start() {
+    this._ModelBadges.fetch();
+  }
 
-        this._Popup.setContent(PView);
-        this._Popup.show();
-    }
-
-    start() {
-        this._ModelBadges.fetch();
-    }
-
-    getBadges() {
-        return this._ModelBadges.get('list');
-    }
+  getBadges() {
+    return this._ModelBadges.get('list');
+  }
 }
 
 Badges.EVENT_FETCH = 'ctrl.badges.fetch';

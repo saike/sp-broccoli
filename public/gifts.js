@@ -24210,78 +24210,86 @@
 	var Popup = __webpack_require__(166);
 	
 	var Badges = function (_Ctrl) {
-	    _inherits(Badges, _Ctrl);
+	  _inherits(Badges, _Ctrl);
 	
-	    function Badges(app) {
-	        _classCallCheck(this, Badges);
+	  function Badges(app) {
+	    _classCallCheck(this, Badges);
 	
-	        var _this = _possibleConstructorReturn(this, (Badges.__proto__ || Object.getPrototypeOf(Badges)).call(this));
+	    var _this = _possibleConstructorReturn(this, (Badges.__proto__ || Object.getPrototypeOf(Badges)).call(this));
 	
-	        _this._ModelBadges = new ModelBadges();
-	        _this._ModelBadges.on(ModelBadges.EVENT_FETCH, function () {
-	            _this.emit(Badges.EVENT_FETCH);
-	            _this._ViewBadges.updateProgress();
-	        });
+	    _this._ModelBadges = new ModelBadges();
+	    _this._ModelBadges.on(ModelBadges.EVENT_FETCH, function () {
+	      _this.emit(Badges.EVENT_FETCH);
+	      _this._ViewBadges.updateProgress();
+	    });
 	
-	        _this._ViewBadges = new ViewBadges({
-	            model: _this._ModelBadges
-	        });
+	    _this._ViewBadges = new ViewBadges({
+	      model: _this._ModelBadges
+	    });
 	
-	        _this._ViewBadges.enableBinding();
-	        _this._ViewBase = _this._ViewBadges;
+	    _this._ViewBadges.enableBinding();
+	    _this._ViewBase = _this._ViewBadges;
 	
-	        _this._ViewBadges.on(ViewBadges.EVENT_POPUP_BADGES, function (data) {
-	            _this.showPopupBadges(data);
-	        });
+	    _this._ViewBadges.on(ViewBadges.EVENT_POPUP_BADGES, function (data) {
+	      _this.showPopupBadges(data);
+	    });
 	
-	        _this._ViewPopupBadges = new ViewPopupBadges({
-	            model: _this._ModelBadges
-	        });
+	    _this._ViewPopupBadges = new ViewPopupBadges({
+	      model: _this._ModelBadges
+	    });
 	
-	        _this._Popup = new Popup();
+	    _this._ViewPopupBadgesNew = new ViewPopupBadgesNew({
+	      model: _this._ModelBadges
+	    });
 	
-	        _this.on(ViewBase.EVENT_MOUNT, _this._ViewBase.updateProgress.bind(_this._ViewBase));
-	        _this._ViewPopupBadges.on(ViewPopupBadges.EVENT_MOVE_TO_TASKS, function () {
-	            _this._Popup.close();
-	            var $el = $('a[href="#qust"]');
-	            $el.click();
-	            setTimeout(function () {
-	                $('html, body').animate({
-	                    scrollTop: $el.offset().top
-	                }, 2000);
-	            }, 500);
-	        });
-	        return _this;
+	    _this._Popup = new Popup();
+	
+	    _this.on(ViewBase.EVENT_MOUNT, _this._ViewBase.updateProgress.bind(_this._ViewBase));
+	
+	    var quests_callback = function quests_callback() {
+	      _this._Popup.close();
+	      var $el = $('a[href="#qust"]');
+	      $el.click();
+	      setTimeout(function () {
+	        $('html, body').animate({
+	          scrollTop: $el.offset().top
+	        }, 2000);
+	      }, 500);
+	    };
+	
+	    _this._ViewPopupBadges.on(ViewBadges.EVENT_MOVE_TO_TASKS, quests_callback);
+	    _this._ViewPopupBadgesNew.on(ViewBadges.EVENT_MOVE_TO_TASKS, quests_callback);
+	    return _this;
+	  }
+	
+	  _createClass(Badges, [{
+	    key: 'showPopupBadges',
+	    value: function showPopupBadges(data) {
+	      if (!data.is_received) return;
+	      var PView = this._ViewPopupBadges;
+	
+	      if (data.index == 1) {
+	        PView = this._ViewPopupBadgesNew;
+	      }
+	
+	      PView.setData(data).render();
+	
+	      this._Popup.setContent(PView);
+	      this._Popup.show();
 	    }
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      this._ModelBadges.fetch();
+	    }
+	  }, {
+	    key: 'getBadges',
+	    value: function getBadges() {
+	      return this._ModelBadges.get('list');
+	    }
+	  }]);
 	
-	    _createClass(Badges, [{
-	        key: 'showPopupBadges',
-	        value: function showPopupBadges(data) {
-	            if (!data.is_received) return;
-	            var PView = this._ViewPopupBadges;
-	
-	            if (data.index == 1) {
-	                PView = new ViewPopupBadgesNew();
-	            }
-	
-	            PView.setData(data).render();
-	
-	            this._Popup.setContent(PView);
-	            this._Popup.show();
-	        }
-	    }, {
-	        key: 'start',
-	        value: function start() {
-	            this._ModelBadges.fetch();
-	        }
-	    }, {
-	        key: 'getBadges',
-	        value: function getBadges() {
-	            return this._ModelBadges.get('list');
-	        }
-	    }]);
-	
-	    return Badges;
+	  return Badges;
 	}(Ctrl);
 	
 	Badges.EVENT_FETCH = 'ctrl.badges.fetch';
@@ -24518,202 +24526,201 @@
 	
 	var ViewBase = __webpack_require__(14);
 	var template = __webpack_require__(220);
+	var ViewBages = __webpack_require__(216);
 	
 	var ViewPopupBadge = function (_ViewBase) {
-	    _inherits(ViewPopupBadge, _ViewBase);
+	  _inherits(ViewPopupBadge, _ViewBase);
 	
-	    function ViewPopupBadge(arg) {
-	        _classCallCheck(this, ViewPopupBadge);
+	  function ViewPopupBadge(arg) {
+	    _classCallCheck(this, ViewPopupBadge);
 	
-	        var _this = _possibleConstructorReturn(this, (ViewPopupBadge.__proto__ || Object.getPrototypeOf(ViewPopupBadge)).call(this, arg));
+	    var _this = _possibleConstructorReturn(this, (ViewPopupBadge.__proto__ || Object.getPrototypeOf(ViewPopupBadge)).call(this, arg));
 	
-	        _this._template = template;
-	        _this._domEvents = {
-	            'click .js-badge': _this._selectBadge,
-	            'click .bns_achiv_show_more': _this._showMore,
-	            'click .js-move-to-tasks': _this._moveToTasks
-	        };
-	        return _this;
+	    _this._template = template;
+	    _this._domEvents = {
+	      'click .js-badge': _this._selectBadge,
+	      'click .bns_achiv_show_more': _this._showMore,
+	      'click .js-move-to-tasks': _this._moveToTasks
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(ViewPopupBadge, [{
+	    key: '_showMore',
+	    value: function _showMore(e) {
+	      e.preventDefault();
+	      e.target.parentNode.querySelector('.bns_oa_desc_text').classList.toggle('act');
+	
+	      if (e.target.parentNode.querySelector('.bns_oa_desc_text').classList.contains('act')) {
+	        e.target.textContent = 'Скрыть описание';
+	      } else {
+	        e.target.textContent = 'Полное описание';
+	      }
 	    }
+	  }, {
+	    key: '_selectBadge',
+	    value: function _selectBadge(e) {
+	      e.preventDefault();
+	      this.selectBadge(e.target.parentNode);
+	    }
+	  }, {
+	    key: 'selectBadge',
+	    value: function selectBadge(badge) {
+	      var cont = this.getEl().querySelector('.bns_ovar_achiv_left');
+	      var selected = cont.querySelector('.js-badge.act');
+	      var id = badge.getAttribute('data-id');
+	      var rightBlock = this.getEl().querySelector('.bns_over_achiv_right');
 	
-	    _createClass(ViewPopupBadge, [{
-	        key: '_showMore',
-	        value: function _showMore(e) {
-	            e.preventDefault();
-	            e.target.parentNode.querySelector('.bns_oa_desc_text').classList.toggle('act');
+	      this._selectedBadge = id;
 	
-	            if (e.target.parentNode.querySelector('.bns_oa_desc_text').classList.contains('act')) {
-	                e.target.textContent = 'Скрыть описание';
-	            } else {
-	                e.target.textContent = 'Полное описание';
-	            }
+	      if (selected) {
+	        selected.classList.remove('act');
+	      }
+	
+	      rightBlock.querySelector('.bns_oa_desc_head img').src = this._tplData.entriesById[id].icon;
+	      rightBlock.querySelector('.bns_oa_desc_head strong').textContent = this._tplData.entriesById[id].name;
+	      rightBlock.querySelector('.bns_oa_desc_text').textContent = this._tplData.entriesById[id].desc;
+	      rightBlock.classList.add('act');
+	
+	      badge.classList.add('act');
+	
+	      this._enableShareBadge(id);
+	    }
+	  }, {
+	    key: '_prepareTplData',
+	    value: function _prepareTplData() {
+	      _get(ViewPopupBadge.prototype.__proto__ || Object.getPrototypeOf(ViewPopupBadge.prototype), '_prepareTplData', this).call(this);
+	      var entries = [],
+	          entriesById = {},
+	          top = 20,
+	          leftPos = [23, 127, 232, 127],
+	          leftPosIndex = 3,
+	          received = 0;
+	
+	      if (this._tplData.list) {
+	        var li = this._tplData.list.length,
+	            item = void 0,
+	            d = {};
+	
+	        for (var i = 0; i < li; i++) {
+	          item = this._tplData.list[i];
+	          d = {
+	            left: leftPos[leftPosIndex] + 'px',
+	            top: top + 'px',
+	            icon: item.thumbs.url_100x100,
+	            index: entries.length,
+	            isReceived: !!item.is_received,
+	            name: item.name,
+	            desc: item.descr,
+	            id: item.id
+	          };
+	
+	          if (item.is_received) {
+	            received++;
+	          }
+	
+	          entries.push(d);
+	
+	          entriesById[item.id] = d;
+	
+	          top += 60;
+	
+	          leftPosIndex++;
+	          if (leftPosIndex >= leftPos.length) {
+	            leftPosIndex = 0;
+	          }
+	
+	          this._tplData['entries'] = entries;
+	          this._tplData['entriesById'] = entriesById;
 	        }
-	    }, {
-	        key: '_selectBadge',
-	        value: function _selectBadge(e) {
-	            e.preventDefault();
-	            this.selectBadge(e.target.parentNode);
+	
+	        var railways = [],
+	            w = {},
+	            rwSize = [[16, 176, 'way1'], [128, 17, 'way2'], [5, 17, 'way3'], [93, 175, 'way4']],
+	            // [topShift,left]
+	        posIndex = 0,
+	            n = 1,
+	            rTop = -11;
+	
+	        this._tplData['count'] = '';
+	
+	        switch (received) {
+	          case 0:
+	            this._tplData['text_achiv'] = 'нет достижений';
+	            break;
+	          case 1:
+	            this._tplData['text_achiv'] = 'одно достижение';
+	            break;
+	          case 2:
+	          case 3:
+	          case 4:
+	            this._tplData['count'] = received;
+	            this._tplData['text_achiv'] = 'достижения';
+	            break;
+	          default:
+	            this._tplData['text_achiv'] = 'достижений';
+	            this._tplData['count'] = received;
 	        }
-	    }, {
-	        key: 'selectBadge',
-	        value: function selectBadge(badge) {
-	            var cont = this.getEl().querySelector('.bns_ovar_achiv_left');
-	            var selected = cont.querySelector('.js-badge.act');
-	            var id = badge.getAttribute('data-id');
-	            var rightBlock = this.getEl().querySelector('.bns_over_achiv_right');
 	
-	            this._selectedBadge = id;
+	        for (var r = 0; r < received; r++) {
 	
-	            if (selected) {
-	                selected.classList.remove('act');
-	            }
+	          if (n > 4) {
+	            n = 1;
+	          }
 	
-	            rightBlock.querySelector('.bns_oa_desc_head img').src = this._tplData.entriesById[id].icon;
-	            rightBlock.querySelector('.bns_oa_desc_head strong').textContent = this._tplData.entriesById[id].name;
-	            rightBlock.querySelector('.bns_oa_desc_text').textContent = this._tplData.entriesById[id].desc;
-	            rightBlock.classList.add('act');
+	          w = {
+	            img: 'img/r' + n + '.png', left: rwSize[posIndex][1] + 'px', top: rTop + 'px', class: rwSize[posIndex][2]
+	          };
 	
-	            badge.classList.add('act');
+	          n++;
+	          rTop += rwSize[posIndex][0];
+	          posIndex++;
 	
-	            this._enableShareBadge(id);
+	          if (posIndex > 3) {
+	            posIndex = 0;
+	          }
+	
+	          railways.push(w);
 	        }
-	    }, {
-	        key: '_prepareTplData',
-	        value: function _prepareTplData() {
-	            _get(ViewPopupBadge.prototype.__proto__ || Object.getPrototypeOf(ViewPopupBadge.prototype), '_prepareTplData', this).call(this);
-	            var entries = [],
-	                entriesById = {},
-	                top = 20,
-	                leftPos = [23, 127, 232, 127],
-	                leftPosIndex = 3,
-	                received = 0;
 	
-	            if (this._tplData.list) {
-	                var li = this._tplData.list.length,
-	                    item = void 0,
-	                    d = {};
+	        this._tplData['railways'] = railways;
+	      }
 	
-	                for (var i = 0; i < li; i++) {
-	                    item = this._tplData.list[i];
-	                    d = {
-	                        left: leftPos[leftPosIndex] + 'px',
-	                        top: top + 'px',
-	                        icon: item.thumbs.url_100x100,
-	                        index: entries.length,
-	                        isReceived: !!item.is_received,
-	                        name: item.name,
-	                        desc: item.descr,
-	                        id: item.id
-	                    };
+	      return this._tplData;
+	    }
+	  }, {
+	    key: '_enableShareBadge',
+	    value: function _enableShareBadge(e) {
+	      var cont = document.querySelector('.bns_achiv_social'),
+	          els = cont.querySelectorAll('a'),
+	          i = 0,
+	          l = els.length,
+	          f = false;
 	
-	                    if (item.is_received) {
-	                        received++;
-	                    }
+	      var index = this._tplData.entriesById[this._selectedBadge].index;
+	      cont.style.display = 'block';
 	
-	                    entries.push(d);
-	
-	                    entriesById[item.id] = d;
-	
-	                    top += 60;
-	
-	                    leftPosIndex++;
-	                    if (leftPosIndex >= leftPos.length) {
-	                        leftPosIndex = 0;
-	                    }
-	
-	                    this._tplData['entries'] = entries;
-	                    this._tplData['entriesById'] = entriesById;
-	                }
-	
-	                var railways = [],
-	                    w = {},
-	                    rwSize = [[16, 176, 'way1'], [128, 17, 'way2'], [5, 17, 'way3'], [93, 175, 'way4']],
-	                    // [topShift,left]
-	                posIndex = 0,
-	                    n = 1,
-	                    rTop = -11;
-	
-	                this._tplData['count'] = '';
-	
-	                switch (received) {
-	                    case 0:
-	                        this._tplData['text_achiv'] = 'нет достижений';
-	                        break;
-	                    case 1:
-	                        this._tplData['text_achiv'] = 'одно достижение';
-	                        break;
-	                    case 2:
-	                    case 3:
-	                    case 4:
-	                        this._tplData['count'] = received;
-	                        this._tplData['text_achiv'] = 'достижения';
-	                        break;
-	                    default:
-	                        this._tplData['text_achiv'] = 'достижений';
-	                        this._tplData['count'] = received;
-	                }
-	
-	                for (var r = 0; r < received; r++) {
-	
-	                    if (n > 4) {
-	                        n = 1;
-	                    }
-	
-	                    w = {
-	                        img: 'img/r' + n + '.png',
-	                        left: rwSize[posIndex][1] + 'px',
-	                        top: rTop + 'px',
-	                        class: rwSize[posIndex][2]
-	                    };
-	
-	                    n++;
-	                    rTop += rwSize[posIndex][0];
-	                    posIndex++;
-	
-	                    if (posIndex > 3) {
-	                        posIndex = 0;
-	                    }
-	
-	                    railways.push(w);
-	                }
-	
-	                this._tplData['railways'] = railways;
-	            }
-	
-	            return this._tplData;
+	      for (; i < l; i++) {
+	        if (this._tplData.list[index].actions && this._tplData.list[index].actions[els[i].getAttribute('data-action')]) {
+	          SAILPLAY.actions.parse(els[i].children[0], this._tplData.list[index].actions[els[i].getAttribute('data-action')]);
+	          f = true;
 	        }
-	    }, {
-	        key: '_enableShareBadge',
-	        value: function _enableShareBadge(e) {
-	            var cont = document.querySelector('.bns_achiv_social'),
-	                els = cont.querySelectorAll('a'),
-	                i = 0,
-	                l = els.length,
-	                f = false;
+	      }
+	      if (!f) {
+	        cont.style.display = 'none';
+	      }
+	    }
+	  }, {
+	    key: '_moveToTasks',
+	    value: function _moveToTasks(e) {
+	      console.log(e);
+	      e.preventDefault();
+	      console.log(ViewBages.EVENT_MOVE_TO_TASKS);
+	      this.emit(ViewBages.EVENT_MOVE_TO_TASKS);
+	    }
+	  }]);
 	
-	            var index = this._tplData.entriesById[this._selectedBadge].index;
-	            cont.style.display = 'block';
-	
-	            for (; i < l; i++) {
-	                if (this._tplData.list[index].actions && this._tplData.list[index].actions[els[i].getAttribute('data-action')]) {
-	                    SAILPLAY.actions.parse(els[i].children[0], this._tplData.list[index].actions[els[i].getAttribute('data-action')]);
-	                    f = true;
-	                }
-	            }
-	            if (!f) {
-	                cont.style.display = 'none';
-	            }
-	        }
-	    }, {
-	        key: '_moveToTasks',
-	        value: function _moveToTasks(e) {
-	            e.preventDefault();
-	            console.log('here');
-	            this.emit(ViewPopupBadge.EVENT_MOVE_TO_TASKS);
-	        }
-	    }]);
-	
-	    return ViewPopupBadge;
+	  return ViewPopupBadge;
 	}(ViewBase);
 	
 	module.exports = ViewPopupBadge;
@@ -24748,6 +24755,8 @@
 	 * Dependencies
 	 */
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -24756,23 +24765,39 @@
 	
 	var ViewBase = __webpack_require__(14);
 	var template = __webpack_require__(222);
+	var ViewBages = __webpack_require__(216);
 	
 	__webpack_require__(223);
 	
 	var ViewPopupBadge = function (_ViewBase) {
-	    _inherits(ViewPopupBadge, _ViewBase);
+	  _inherits(ViewPopupBadge, _ViewBase);
 	
-	    function ViewPopupBadge(arg) {
-	        _classCallCheck(this, ViewPopupBadge);
+	  function ViewPopupBadge(arg) {
+	    _classCallCheck(this, ViewPopupBadge);
 	
-	        var _this = _possibleConstructorReturn(this, (ViewPopupBadge.__proto__ || Object.getPrototypeOf(ViewPopupBadge)).call(this, arg));
+	    var _this = _possibleConstructorReturn(this, (ViewPopupBadge.__proto__ || Object.getPrototypeOf(ViewPopupBadge)).call(this, arg));
 	
-	        _this._template = template;
-	        return _this;
+	    _this._template = template;
+	    _this._domEvents = {
+	      'click .js-move-to-tasks': _this._moveToTasks
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(ViewPopupBadge, [{
+	    key: '_moveToTasks',
+	    value: function _moveToTasks(e) {
+	      console.log(e);
+	      e.preventDefault();
+	      console.log(ViewBages.EVENT_MOVE_TO_TASKS);
+	      this.emit(ViewBages.EVENT_MOVE_TO_TASKS);
 	    }
+	  }]);
 	
-	    return ViewPopupBadge;
+	  return ViewPopupBadge;
 	}(ViewBase);
+	
+	// ViewPopupBadge.EVENT_MOVE_TO_TASKS = 'view.badges.move-to-task';
 	
 	module.exports = ViewPopupBadge;
 
