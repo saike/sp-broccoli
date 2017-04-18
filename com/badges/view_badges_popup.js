@@ -8,6 +8,7 @@ const template = require('./tpl_badges_popup.hbs');
 const ViewBages = require('./view_badges');
 
 class ViewPopupBadge extends ViewBase {
+
   constructor(arg) {
     super(arg);
     this._template = template;
