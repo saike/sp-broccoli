@@ -39,7 +39,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loaders: [ "uglify-loader", "babel?presets[]=es2015" ]
+      loaders: [ "babel?presets[]=es2015" ]
     }, {
       test: /\.hbs/, loader: "handlebars-loader", exclude: /(node_modules)/
     }, {
@@ -52,4 +52,4 @@ module.exports = {
       test: /\.(eot|svg|woff|woff2|ttf|otf)$/, loader: "file?name=fonts/[name].[ext]"
     }]
   }
-}
+};

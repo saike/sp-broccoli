@@ -34,7 +34,6 @@
     "sailplay-hub": "latest",
     "script-loader": "^0.7.0",
     "tiny-cookie": "^0.5.5",
-    "uglify-loader": "^2.0.0",
     "webpack": "^1.13.2",
     "webpack-closure-compiler": "^2.1.3"
   }
