@@ -58,7 +58,7 @@ class ViewGifts extends ViewBase {
             item['disable'] = false;
             item['needPoints'] = 0;
             item['pic_full'] = item.pic_full || item.thumbs.url_250x250;
-            if (this._tplData['points'] - item['points'] <= 0) {
+            if (this._tplData['points'] - item['points'] < 0) {
                 let points = Math.abs(this._tplData['points'] - item['points']);
                 item['disable'] = true;
                 item['needPoints'] = points;
