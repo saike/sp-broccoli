@@ -58,9 +58,10 @@ class ViewGifts extends ViewBase {
             item['disable'] = false;
             item['needPoints'] = 0;
             item['pic_full'] = item.pic_full || item.thumbs.url_250x250;
-            let points = Math.abs(this._tplData['points'] - item['points'])
-            if (isNaN(points) || points <= 0) {
+            let points_no_abs = this._tplData['points'] - item['points']
+            if (isNaN(points_no_abs) || points_no_abs < 0) {
                 
+                let points = Math.abs(this._tplData['points'] - item['points'])                
                 item['disable'] = true;
                 item['needPoints'] = points;
                 item['needPointsText'] = 'балл' + ViewBase.getNumEnding(this._tplData['points'], ['', 'а', 'ов']);
