@@ -34,7 +34,7 @@ class ViewGifts extends ViewBase {
 
     renderGifts () {
         let list = this._tplData['list'],
-            perSlide = 6,
+            perSlide = 4,
             slidesCount = Math.ceil(list.length/perSlide, 10),
             slides = [];
 
