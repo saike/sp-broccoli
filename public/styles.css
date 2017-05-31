@@ -915,7 +915,6 @@ body.no_scrol {
   width: 100%;
   text-align: center;
   margin-top: 67px;
-  display: flex !important;
 }
 .bns_tab_gift_slide .bns_tab_gift_item {
   display: inline-block;
@@ -928,6 +927,9 @@ body.no_scrol {
   overflow: hidden;
   height: 380px;
   position: relative;
+}
+.bns_tab_gift_slide .bns_tab_gift_item:last-child {
+  margin-right: 0;
 }
 .bns_tab_gift_slide .bns_tab_gift_item .bns_tab_gift_item_img {
   float: left;

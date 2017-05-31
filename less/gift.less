@@ -55,7 +55,6 @@
   width: 100%;
   text-align: center;
   margin-top:67px;
-  display: flex !important;
   .bns_tab_gift_item {
     display: inline-block;
     margin: 22px 0;
@@ -67,6 +66,9 @@
     overflow: hidden;
     height: 380px;
     position: relative;
+    &:last-child {
+      margin-right: 0;
+    }
     .bns_tab_gift_item_img {
       float: left;
       width: 100%;
